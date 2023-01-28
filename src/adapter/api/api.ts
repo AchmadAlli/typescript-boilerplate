@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
+import { getEnv } from "../../config/env";
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ app.get("/api/check-health", (req: Request, res: Response) => {
 });
 
 export const listen_api =  () => {
-  app.listen(3000, () => {
+  app.listen(getEnv().port, () => {
     console.log("server is running");
   });
 };
