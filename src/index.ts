@@ -1,3 +1,3 @@
-import apiAdapter from './adapter/api/api'
+import { listen_api } from './adapter/api/api'
 
-apiAdapter()
+listen_api()

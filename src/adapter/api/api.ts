@@ -12,7 +12,7 @@ app.get("/api/check-health", (req: Request, res: Response) => {
   });
 });
 
-export default () => {
+export const listen_api =  () => {
   app.listen(3000, () => {
     console.log("server is running");
   });
