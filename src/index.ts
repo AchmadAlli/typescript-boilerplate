@@ -1,3 +1,3 @@
-import apiAdapter from './adapter/api/api';
+import apiAdapter from './adapter/api/api'
 
-apiAdapter();
+apiAdapter()
