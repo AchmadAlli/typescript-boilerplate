@@ -1,20 +1,26 @@
 import express, { Request, Response } from "express";
-import dotenv from "dotenv";
-import { getEnv } from "../../config/env";
+import env from "../../config/env";
+import { ApiAdapter } from "../../domain/api";
+import logger from "../../infrastructure/logger/winston";
 
-dotenv.config();
+function listen() : void {
+  const app = express();
 
-const app = express();
-
-app.get("/api/check-health", (req: Request, res: Response) => {
-  res.send({
-    message: "server is up",
-    data: null,
+  app.get("/api/check-health", (req: Request, res: Response) => {
+    res.send({
+      message: "server is up",
+      data: null,
+    });
   });
-});
-
-export const listen_api =  () => {
-  app.listen(getEnv().port, () => {
-    console.log("server is running");
+  
+  app.listen(env.port, () => {
+    logger.info(`Server is running on port ${env.port}`)
   });
-};
+}
+
+
+export function NewExpressAdapter() : ApiAdapter{
+  return <ApiAdapter>{
+    Listen: listen
+  }
+}

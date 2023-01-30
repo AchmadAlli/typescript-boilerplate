@@ -1,5 +1,5 @@
-import { listen_api } from './adapter/api/api'
-import { loadEnv } from './config/env'
+import {NewExpressAdapter} from './adapter/api/api'
 
-loadEnv()
-listen_api()
+const e = NewExpressAdapter()
+
+e.Listen()

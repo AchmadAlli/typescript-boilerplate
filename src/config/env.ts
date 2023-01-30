@@ -1,31 +1,15 @@
 import dotenv from "dotenv";
 
-type AppEnv = {
+interface AppEnv {
   name: string
   port: number
 }
 
-let env : AppEnv
+const envFile = dotenv.config().parsed;
 
-export function loadEnv() : void{
-  const envFile = dotenv.config().parsed;
-
-  if(env !== undefined){
-    return;
-  }
-
-  env = {
-    name: String(process.env.EXPRESS_NAME || envFile?.name),
-    port: Number(process.env.PORT || envFile?.port),
-  }
-
-  console.log("env loaded");
+const env : AppEnv = {
+  name: String(process.env.NAME || envFile?.name),
+  port: Number(process.env.PORT || envFile?.port),
 }
 
-export const getEnv = () : AppEnv => {
-  if (env === undefined){
-    loadEnv()
-  }
-
-  return env
-}
+export default env;
