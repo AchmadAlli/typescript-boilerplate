@@ -1,5 +1,5 @@
-import {NewExpressAdapter} from './adapter/api/api'
+import ExpressApiAdapter from './adapter/api/api'
 
-const e = NewExpressAdapter()
+const e = new ExpressApiAdapter();
 
 e.Listen()

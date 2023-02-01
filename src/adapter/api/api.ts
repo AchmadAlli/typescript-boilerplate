@@ -1,22 +1,23 @@
+import bodyParser from "body-parser";
 import express from "express";
 import env from "../../config/env";
 import { ApiAdapter } from "../../domain/api";
 import logger from "../../infrastructure/logger/winston";
 import { registerRouter } from "./routes";
 
-function listen() : void {
-  const app = express();
+class ExpressApiAdapter implements ApiAdapter{
 
-  registerRouter(app)
+  Listen() : void {
+    const app = express();
   
-  app.listen(env.port, () => {
-    logger.info(`Server is running on port ${env.port}`)
-  });
-}
-
-
-export function NewExpressAdapter() : ApiAdapter{
-  return <ApiAdapter>{
-    Listen: listen
+    app.use(bodyParser.json());
+  
+    registerRouter(app)
+    
+    app.listen(env.port, () => {
+      logger.info(`Server is running on port ${env.port}`)
+    });
   }
 }
+
+export default ExpressApiAdapter;
