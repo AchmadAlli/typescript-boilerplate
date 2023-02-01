@@ -11,7 +11,8 @@ class AuthHandler {
 		this.loginUsecase = loginUsecase;
 	}
 
-	login(req: Request, res: Response) {
+	// make as class property to avoid binding 
+	login = (req: Request, res: Response) => {
 		logger.info("login endpoint triggered");
 
 		const auth = this.loginUsecase.authenticate(<Credential>{

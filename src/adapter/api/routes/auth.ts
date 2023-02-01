@@ -15,7 +15,7 @@ class AuthRouter implements ApiRouter{
 
 		e.use('/auth', this.router);
 		
-		this.router.get('/login', this.handler.login.bind(this.handler));
+		this.router.get('/login', this.handler.login);
 		this.router.get('/register', this.handler.register);
 	}
 }
