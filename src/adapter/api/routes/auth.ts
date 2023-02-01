@@ -1,13 +1,23 @@
-import {Router} from "express";
-import { loginHandler, registerHandler } from "../handler/auth_handler";
+import { Router } from 'express';
+import { ApiRouter } from '../../../domain/api';
+import AuthHandler  from '../handler/auth_handler';
 
-const router = Router()
+class AuthRouter implements ApiRouter{
+	private router: Router;
+	private handler: AuthHandler;
 
-function registerUserRoute(e : Router) : void{
-    e.use("/auth", router)
-    router.get("/login", loginHandler)
-    router.get("/register", registerHandler)
+	constructor(authHandler: AuthHandler){
+		this.router = Router();
+		this.handler = authHandler;
+	}
+	
+	register(e: Router): void {
+
+		e.use('/auth', this.router);
+		
+		this.router.get('/login', this.handler.login.bind(this.handler));
+		this.router.get('/register', this.handler.register);
+	}
 }
 
-
-export default registerUserRoute;
+export default AuthRouter;
